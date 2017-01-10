@@ -1,0 +1,34 @@
+# Pushfile options
+
+upload_limit: 10000000
+
+# Rackspace
+rackspace_cdn: ''
+rackspace_key: ''
+rackspace_username: ''
+rackspace_container: ''
+
+# Amazon
+amazon_cdn: ''
+amazon_key: ''
+amazon_secret: ''
+amazon_container: ''
+
+# Image resize configs
+images:
+  default:
+    width: 590
+  article:
+    width: 610
+  ads:
+    width: 155
+  groups:
+    width: 236
+  logo:
+    width: 3200
+  files:
+    width: 3200
+  thumb:
+    width: 90
+  avatar:
+    width: 50
