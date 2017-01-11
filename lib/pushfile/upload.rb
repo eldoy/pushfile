@@ -50,18 +50,11 @@ module Pushfile
 
     # Create upload
     def create
-      if @data.is_a?(String)
-        @file = File.open(@data)
-        @name = filename(@data)
-      else
-        @file = @data[:tempfile]
-        @name = filename(@data[:filename])
-      end
+      @file = @data.is_a?(String) ? File.open(@data) : @data[:tempfile]
+      @name = filename(@data.is_a?(String) ? @data : @data[:filename])
 
       # Check if it's more than max or return error
-      if @max and @file.size > @max
-        return (@status = {:error => 'upload_file_size_is_too_big'})
-      end
+      return (@status = {:error => 'upload_file_size_is_too_big'}) if @max and @file.size > @max
 
       # Resize file and create thumbnail for image
       if @name =~ IMAGE_REGEX

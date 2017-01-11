@@ -1,5 +1,5 @@
 # Pushfile Cloud File Uploader
-Upload files to Rackspace Cloud or Amazon S3 by URL or file with automatic image resizing.
+Upload files to Rackspace Cloud or Amazon S3 by URL or file, with automatic image resizing and thumbnails.
 
 ### Installation
 ```
@@ -25,7 +25,7 @@ Create a config/pushfile.yml for your settings.
 
 See [the example pushfile.yml](https://github.com/fugroup/pushfile/blob/master/config/pushfile.yml) for an example.
 
-If you define an image config, any images you upload will be automatically resized before uploading. You can define both the desired max height and width.
+If you define an image config, any images you upload will be automatically resized before uploading. You can define both the desired max height and width. All images will also be thumbnailed.
 
 ### Usage
 For more examples have a look at [the tests for Pushfile.](https://github.com/fugroup/pushfile/blob/master/test/upload_test.rb)
@@ -51,6 +51,21 @@ u.create
 
 # Get uploaded url with data
 u.status # => Hash with urls and data
+
+# Example response hash
+{
+  # The file URL
+  :url => "http://f.7i.no/1484109810_fugroup_avatar.jpg",
+
+  # The thumbnail URL (only for images)
+  :thumb_url => "http://f.7i.no/1484109810_fugroup_avatar_thumb.jpg",
+
+  # The size of the file after resizing
+  :size => 40288,
+
+  # The file's mime type
+  :mimetype=>"image/jpeg"
+}
 
 # Remove file from CDN
 u.destroy(url)
