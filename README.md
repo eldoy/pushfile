@@ -32,13 +32,19 @@ For more examples have a look at [the tests for Pushfile.](https://github.com/fu
 require 'pushfile'
 
 # Create an upload
-u = Pushfile::Upload.new
+options = {
+  'filename' => 'name.jpg', :tempfile => '/tmp/name.jpg', :mimetype' => 'image/jpeg'
+}
+u = Pushfile::Upload.new(options)
 
 # Actually upload file
 u.create
 
 # Get uploaded url with data
 u.status # => Hash with urls and data
+
+# Get the URL quickly
+url = Pushfile::Upload.new.create[:url]
 
 # Remove file from CDN
 u.destroy(url)
