@@ -9,6 +9,15 @@ or add to Gemfile.
 
 ### Settings
 ```ruby
+# The settings are stored in ./config/pushfile.yml
+@settings = YAML.load_file(File.join(Dir.pwd, 'config', 'pushfile.yml')).deep_symbolize_keys
+
+# The provider, amazon or rackspace
+@provider = 'amazon'
+
+# Mode, default is development
+@mode = ENV['RACK_ENV'] || 'development'
+
 # Debug
 Pushfile.debug = false
 ```
