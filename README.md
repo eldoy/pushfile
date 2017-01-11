@@ -32,7 +32,10 @@ For more examples have a look at [the tests for Pushfile.](https://github.com/fu
 require 'pushfile'
 
 # Set up a new upload
-u = Pushfile::Upload.new('filename' => 'name.jpg', :tempfile => '/tmp/name.jpg', :mimetype' => 'image/jpeg')
+u = Pushfile::Upload.new(
+  'filename' => 'name.jpg',
+  :tempfile => '/tmp/name.jpg',
+  :mimetype' => 'image/jpeg')
 
 # Actually upload file to CDN
 u.create
