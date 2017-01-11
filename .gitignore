@@ -1,2 +1,3 @@
+config/pushfile.yml
 .bundle
 Gemfile.lock
