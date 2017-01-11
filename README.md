@@ -25,17 +25,26 @@ Create a config/pushfile.yml for your settings.
 
 See [the example pushfile.yml](https://github.com/fugroup/pushfile/blob/master/config/pushfile.yml) for an example.
 
+If you define an image config, any images you upload will be automatically resized before uploading. You can define both the desired max height and width.
+
 ### Usage
 For more examples have a look at [the tests for Pushfile.](https://github.com/fugroup/pushfile/blob/master/test/upload_test.rb)
 ```ruby
 # Require pushfile if not using Bundler
 require 'pushfile'
 
-# Set up a new upload
-u = Pushfile::Upload.new(
-  'filename' => 'name.jpg',
-  :tempfile => '/tmp/name.jpg',
-  :mimetype' => 'image/jpeg')
+# Set up a new upload from web server params
+# The Froala editor support is automatic
+u = Pushfile::Upload.new(params)
+
+# Ajax upload with progress support, pass the request body StringIO object
+u = Pushfile::Upload.new(params.merge(:stream => request.body))
+
+# Set up a new upload from local file
+u = Pushfile::Upload.new(:filename => 'name.jpg', :tempfile => '/tmp/name.jpg')
+
+# Upload from remote URL
+u = Pushfile::Upload.new(:url => 'http://fugroup.net/images/fugroup_logo1.png')
 
 # Actually upload file to CDN
 u.create

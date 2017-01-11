@@ -7,14 +7,14 @@ module Pushfile
     # Set up data
     def setup_data
       # Fetch the image into a tempfile, and store
-      if @options['url']
+      if @options[:url]
         url_upload
 
-      elsif @options['filename']
+      elsif @options[:filename]
         ajax_upload
 
       # Do the froala file uploads
-      elsif @options['file']
+      elsif @options[:file]
         froala_upload
 
       end
@@ -22,8 +22,8 @@ module Pushfile
 
     # Ajax upload
     def ajax_upload
-      filename = @options['filename']
-      type = @options['mimetype']
+      filename = @options[:filename]
+      type = @options[:mimetype] || mimetype(filename)
       file = @options[:tempfile] || "/tmp/upload-#{filename}"
 
       # Pass stream (typically request.body) to read chunks
@@ -41,16 +41,16 @@ module Pushfile
 
     # Froala upload
     def froala_upload
-      tmpfile = @options['file'][:tempfile]
-      filename = @options['file'][:filename]
-      type = @options['file'][:type]
+      tmpfile = @options[:file][:tempfile]
+      filename = @options[:file][:filename]
+      type = @options[:file][:type] || mimetype(filename)
 
       {:filename => filename, :tempfile => tmpfile, :type => type}
     end
 
     # URL upload
     def url_upload
-      url = @options['url'].strip
+      url = @options[:url].strip
 
       file = Tempfile.new('tmp').tap do |file|
         file.binmode # must be in binary mode
@@ -58,13 +58,21 @@ module Pushfile
         file.rewind
       end
 
+      # Extract the file name from the URL
       filename = url.split('/').last
-      extension = filename.split('.').last.downcase rescue ''
 
       # Mime type
-      type = Rack::Mime.mime_type(".#{extension}")
+      type = @options[:mimetype] || mimetype(filename)
 
       {:filename => filename, :type => type, :tempfile => file}
+    end
+
+    private
+
+    # Get the mime type from a file name
+    def mimetype(path)
+      extension = File.basename(path).split('.')[-1]
+      Rack::Mime.mime_type(".#{extension}")
     end
 
   end

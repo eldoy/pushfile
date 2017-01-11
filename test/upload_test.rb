@@ -13,7 +13,7 @@ tmp = "/tmp/upload-#{base}"
 stop "#{tmp} doesn't exist" unless File.file?(tmp)
 
 test '* config'
-options = {'filename' => File.basename(f.path), :tempfile => tmp, 'mimetype' => 'image/jpeg'}
+options = {:filename => File.basename(f.path), :tempfile => tmp, :mimetype => 'image/jpeg'}
 
 u = Pushfile::Upload.new(options.merge(:config => :campaign))
 is u.width, 610
@@ -31,9 +31,24 @@ u = Pushfile::Upload.new
 is u.width, 590
 
 
+test '* url upload, amazon'
+
+options = {:url => 'http://fugroup.net/images/fugroup_logo1.png'}
+
+u = Pushfile::Upload.new(options)
+is u.provider, 'amazon'
+is u.container, '7ino'
+is u.width, 590
+is u.status, nil
+
+u.create
+is u.status, :a? => Hash
+is u.status[:mimetype], 'image/png'
+
+
 test '* ajax upload, amazon'
 
-options = {'filename' => File.basename(f.path), :tempfile => tmp, 'mimetype' => 'image/jpeg'}
+options = {:filename => File.basename(f.path), :tempfile => tmp, :mimetype => 'image/jpeg'}
 
 u = Pushfile::Upload.new(options)
 
@@ -68,7 +83,7 @@ test '* max size'
 
 Pushfile.provider = 'amazon'
 
-options = {:max => 1, 'filename' => File.basename(f.path), :tempfile => tmp, 'mimetype' => 'image/jpeg'}
+options = {:max => 1, :filename => File.basename(f.path), :tempfile => tmp, :mimetype => 'image/jpeg'}
 
 u = Pushfile::Upload.new(options)
 
