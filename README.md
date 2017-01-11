@@ -33,7 +33,15 @@ require 'pushfile'
 
 # Create an upload
 u = Pushfile::Upload.new
+
+# Actually upload file
+u.create
+
+# Get uploaded url with data
 u.status # => Hash with urls and data
+
+# Remove file from CDN
+u.destroy(url)
 ```
 
 Created and maintained by [Fugroup Ltd.](https://www.fugroup.net) We are the creators of [CrowdfundHQ.](https://crowdfundhq.com)
