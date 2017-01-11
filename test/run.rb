@@ -11,8 +11,7 @@ begin
     'upload'
   ].each{|t| require_relative "#{t}_test"}
 rescue => x
-  puts x.message
-  err(x)
+  err(x, :v)
 ensure
   puts Time.now - start
 end
