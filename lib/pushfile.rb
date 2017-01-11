@@ -31,7 +31,3 @@ require_relative 'pushfile/util'
 require_relative 'providers/amazon'
 require_relative 'providers/rackspace'
 require_relative 'pushfile/upload'
-
-# u = Upload.new(config)
-# u.create(data)
-# u
