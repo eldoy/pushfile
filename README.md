@@ -26,7 +26,7 @@ Create a config/pushfile.yml for your settings.
 See [the example pushfile.yml](https://github.com/fugroup/pushfile/blob/master/config/pushfile.yml) for an example.
 
 ### Usage
-For a real-world example with a test runner ready, have a look at [the tests for Pushfile.](https://github.com/fugroup/pushfile/tree/master/test)
+For more examples have a look at [the tests for Pushfile.](https://github.com/fugroup/pushfile/blob/master/test/upload_test.rb)
 ```ruby
 # Require pushfile if not using Bundler
 require 'pushfile'
