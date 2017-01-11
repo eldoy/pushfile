@@ -23,10 +23,8 @@ module Pushfile
       rescue
         @thumb = nil
       else
-        t = @name.split('.')
-        ext = t.pop
+        t = @name.split('.'); ext = t.pop
         @thumb = t.join(".").concat("_thumb.#{ext}")
-
         image.write("/tmp/#{@thumb}") rescue @thumb = nil
       end
     end
