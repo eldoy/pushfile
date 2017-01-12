@@ -64,7 +64,7 @@ u.status # => Hash with urls and data
   :size => 40288,
 
   # The file's mime type
-  :mimetype=>"image/jpeg"
+  :mimetype => "image/jpeg"
 }
 
 # Remove file from CDN
