@@ -10,7 +10,9 @@ is Pushfile.provider, 'amazon'
 base = File.basename(f.path)
 tmp = "/tmp/upload-#{base}"
 
-stop "#{tmp} doesn't exist" unless File.file?(tmp)
+# Move test file into /tmp
+`cp #{f.path} #{tmp}` unless File.file?(tmp)
+
 
 test '* config'
 options = {:filename => File.basename(f.path), :tempfile => tmp, :mimetype => 'image/jpeg'}
