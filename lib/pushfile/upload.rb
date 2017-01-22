@@ -25,11 +25,11 @@ module Pushfile
         :container => send("#{@provider}_container"),
         :max => Pushfile.settings[:upload_limit],
         :snet => Pushfile.mode == 'production',
-        :provider => @provider,
+        :provider => @provider
       }.merge(o)
 
       # Merge image config
-      o.merge!(Pushfile.settings[:images][config]) rescue nil
+      o = Pushfile.settings[:images][config].merge(o) rescue o
 
       # Storing options
       @options = o
