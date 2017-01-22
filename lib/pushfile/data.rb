@@ -13,9 +13,9 @@ module Pushfile
       elsif @options[:filename]
         ajax_upload
 
-      # Do the froala file uploads
-      elsif @options[:file]
-        froala_upload
+      # Do Froala or Dropzone file uploads
+      elsif @options[:file] || @options[:datafile]
+        file_upload
 
       end
     end
@@ -39,11 +39,11 @@ module Pushfile
       {:filename => filename, :tempfile => File.new(file), :type => type}
     end
 
-    # Froala upload
-    def froala_upload
-      tmpfile = @options[:file][:tempfile]
-      filename = @options[:file][:filename]
-      type = @options[:file][:type] || mimetype(filename)
+    # File upload
+    def file_upload
+      o = @options[:file] || @options[:datafile]
+      tmpfile, filename = o[:tempfile], o[:filename]
+      type = o[:type] || mimetype(filename)
 
       {:filename => filename, :tempfile => tmpfile, :type => type}
     end
