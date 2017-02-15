@@ -17,7 +17,7 @@ module Pushfile
       @provider = o[:provider] || Pushfile.provider || 'amazon'
 
       # Extract config
-      config = o.delete(:config) || :default
+      config = (o.delete(:config).to_sym rescue nil) || :default
 
       # Default options
       o = {
