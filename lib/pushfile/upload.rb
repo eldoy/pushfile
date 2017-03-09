@@ -51,6 +51,10 @@ module Pushfile
     # Create upload
     def create
       @file = @data.is_a?(String) ? File.open(@data) : @data[:tempfile]
+
+      # Return error if no file
+      return (@status = {:error => 'upload_file_not_found'}) unless @file
+
       @name = filename(@data.is_a?(String) ? @data : @data[:filename])
 
       # Check if it's more than max or return error

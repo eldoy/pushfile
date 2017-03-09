@@ -16,7 +16,6 @@ module Pushfile
       # Do Froala or Dropzone file uploads
       elsif @options[:file] || @options[:datafile]
         file_upload
-
       end
     end
 
@@ -52,11 +51,13 @@ module Pushfile
     def url_upload
       url = @options[:url].strip
 
+      content = RestClient.get(url) rescue nil
+
       file = Tempfile.new('tmp').tap do |file|
         file.binmode # must be in binary mode
-        file.write RestClient.get(url)
+        file.write(content)
         file.rewind
-      end
+      end if content
 
       # Extract the file name from the URL
       filename = url.split('/').last
