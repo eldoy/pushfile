@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'pushfile'
-  s.version     = '0.1.1'
-  s.date        = '2017-02-15'
+  s.version     = '0.1.2'
+  s.date        = '2017-03-09'
   s.summary     = "Pushfile Cloud File Uploader"
   s.description = "Upload files to Rackspace Cloud or Amazon S3 by URL or file with automatic image resizing."
   s.authors     = ["Fugroup Limited"]

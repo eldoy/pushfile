@@ -1,3 +1,7 @@
+**Version 0.1.2** - *2017-03-09*
+
+- Error handling for empty name in URL upload
+
 **Version 0.1.1** - *2017-02-15*
 
 - Fixed resize config lookup
