@@ -13,6 +13,9 @@ module Pushfile
     attr_accessor :provider, :file, :timestamp, :name, :thumb, :type, :cdn, :container, :max, :status, :service, :width, :height, :data
 
     def initialize(o = {})
+      # Convert option keys to symbols
+      o = o.symbolize_keys
+
       # Set provider
       @provider = o[:provider] || Pushfile.provider || 'amazon'
 
