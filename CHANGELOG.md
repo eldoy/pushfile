@@ -1,3 +1,7 @@
+**Version 0.1.3** - *2018-05-20*
+
+- Symbolize keys in upload
+
 **Version 0.1.2** - *2017-03-09*
 
 - Error handling for empty name in URL upload
